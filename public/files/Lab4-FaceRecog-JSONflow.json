@@ -1,0 +1,165 @@
+[
+    {
+        "id": "e90ff919.c0646",
+        "type": "tab",
+        "label": "Flow 2"
+    },
+    {
+        "id": "c2d1f58e.b8725",
+        "type": "http in",
+        "z": "e90ff919.c0646",
+        "name": "",
+        "url": "/people",
+        "method": "get",
+        "swaggerDoc": "",
+        "x": 112,
+        "y": 192,
+        "wires": [
+            [
+                "55b818e4.f0435"
+            ]
+        ]
+    },
+    {
+        "id": "55b818e4.f0435",
+        "type": "switch",
+        "z": "e90ff919.c0646",
+        "name": "check image url",
+        "property": "payload.imageurl",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 244,
+        "y": 293,
+        "wires": [
+            [
+                "68bee6b8.023ef"
+            ],
+            [
+                "644695cf.fb6d8c"
+            ]
+        ]
+    },
+    {
+        "id": "68bee6b8.023ef",
+        "type": "template",
+        "z": "e90ff919.c0646",
+        "name": "Prompt Image",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<h1>Welcome to my Face Detection app</h1>\n<H2>Recognize anyone?</H2>\n<form action=\"{{req._parsedUrl.pathname}}\">\n<img src=\"http://asbarez.com/wp-content/uploads/2016/02/ibmwatson.jpg\" height='200'/>\n<img src=\"http://www.awaken.com/wp-content/uploads/2015/05/forbes.jpg\" height='200'/>\n<img\nsrc=\"https://www.commerce.gov/sites/commerce.gov/files/styles/scale_250w/public/media/images/profile/elizabethholmes.jpg?it\nok=DHmvdC-1\" height='200'/>\n<br/>Right-click one of the above images and select Copy image location and paste the URL in the box below.<br>Do\nan image search for faces, try multiple faces. After you click on an image, to the right it usually says \"View image\" click\nthat to get the URL.<br/>\n<br>Image URL: <input type=\"text\" name=\"imageurl\"/>\n<input type=\"submit\" value=\"Analyze\"/>\n</form>",
+        "x": 571,
+        "y": 188,
+        "wires": [
+            [
+                "22c90b13.9f3b4c"
+            ]
+        ]
+    },
+    {
+        "id": "644695cf.fb6d8c",
+        "type": "change",
+        "z": "e90ff919.c0646",
+        "name": "Extract Image URL",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.imageurl",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 449,
+        "y": 387,
+        "wires": [
+            [
+                "af10e1ff.f56688",
+                "cca5f592.d6ad98"
+            ]
+        ]
+    },
+    {
+        "id": "f4cbeefb.db493",
+        "type": "template",
+        "z": "e90ff919.c0646",
+        "name": "Report Faces",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<h1>Visual Recognition v3 Image Analysis</h1>\n    <p>Analyzed image: {{result.images.0.resolved_url}}<br/><img id=\"image\" src=\"{{result.images.0.resolved_url}}\" height=\"200\"/></p>\n    {{^result}}\n        <P>No Face detected</P>\n    {{/result}}\n    <p>Images Processed: {{result.images_processed}}</p>\n    <table border='1'>\n        <thead><tr><th>Age Range</th><th>Confidence</th><th>Gender</th><th>Confidence</th><th>Name</th></tr></thead>\n        {{#result.images.0.faces}}<tr>\n            <td><b>{{age.min}} - {{age.max}}</b></td><td><i>{{age.score}}</i></td>\n            <td>{{gender.gender}}</td><td>{{gender.score}}</td>\n            <td>{{identity.name}} ({{identity.score}})</td>\n        </tr>{{/result.images.0.faces}}\n    </table>\n    <form  action=\"{{req._parsedUrl.pathname}}\">\n        <br><input type=\"submit\" value=\"Try again or go back to the home page\"/>\n    </form>",
+        "x": 866,
+        "y": 309,
+        "wires": [
+            [
+                "22c90b13.9f3b4c"
+            ]
+        ]
+    },
+    {
+        "id": "22c90b13.9f3b4c",
+        "type": "http response",
+        "z": "e90ff919.c0646",
+        "name": "",
+        "x": 922,
+        "y": 181,
+        "wires": []
+    },
+    {
+        "id": "af10e1ff.f56688",
+        "type": "debug",
+        "z": "e90ff919.c0646",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 618,
+        "y": 481,
+        "wires": []
+    },
+    {
+        "id": "20d6eff9.f3c3a",
+        "type": "debug",
+        "z": "e90ff919.c0646",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 843,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "cca5f592.d6ad98",
+        "type": "visual-recognition-v3",
+        "z": "e90ff919.c0646",
+        "name": "ImgAnalysis",
+        "apikey": "ipoierpoizeoprize",
+        "image-feature": "detectFaces",
+        "lang": "en",
+        "x": 641,
+        "y": 346,
+        "wires": [
+            [
+                "20d6eff9.f3c3a",
+                "f4cbeefb.db493"
+            ]
+        ]
+    }
+]

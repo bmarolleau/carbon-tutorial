@@ -29,7 +29,7 @@ const LandingPage = () => {
             </BreadcrumbItem>
           </Breadcrumb>
           <h1 className="landing-page__heading">
-            Design &amp; build with Carbon
+            Get Started with IBM Cloud, Node-RED and Watson
           </h1>
         </div>
       </div>
@@ -37,22 +37,22 @@ const LandingPage = () => {
       <div className="bx--row landing-page__r2">
         <div className="bx--col bx--no-gutter">
           <Tabs {...props.tabs} aria-label="Tab navigation">
-            <Tab {...props.tab} label="About">
+            <Tab {...props.tab} label="Welcome">
               <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
                 <div className="bx--row landing-page__tab-content">
                   <div className="bx--col-md-4 bx--col-lg-7">
                     <h2 className="landing-page__subheading">
-                      What is Carbon?
+                      Welcome to the IBM Cloud and Watson Day website
                     </h2>
                     <p className="landing-page__p">
-                      Carbon is IBM’s open-source design system for digital
-                      products and experiences. With the IBM Design Language as
-                      its foundation, the system consists of working code,
-                      design tools and resources, human interface guidelines,
-                      and a vibrant community of contributors.
+                      On this page : Docs, Labs, Demonstrations, Cloud
+                      Computing, DevOps, Prototyping...
                     </p>
-                    <Button>Learn more</Button>
+                    <Button target="_blank" href="https://cloud.ibm.com">
+                      Connect to IBM Cloud
+                    </Button>
                   </div>
+
                   <div className="bx--col-md-4 bx--offset-lg-1 bx--col-lg-8">
                     <img
                       className="landing-page__illo"
@@ -63,23 +63,121 @@ const LandingPage = () => {
                 </div>
               </div>
             </Tab>
-
-            <Tab {...props.tab} label="Design">
+            <Tab {...props.tab} label="Lab 1">
               <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
                 <div className="bx--row landing-page__tab-content">
-                  <div className="bx--col-lg-16">
-                    Rapidly build beautiful and accessible experiences. The
-                    Carbon kit contains all resources you need to get started.
+                  <div className="bx--col-md-4 bx--col-lg-7">
+                    <h2 className="landing-page__subheading">
+                      Lab 1 - Create an Internet of Things Platform starter
+                      application
+                    </h2>
+                    <p className="landing-page__p">
+                      Learn how to create a Node-RED and Watson IoT Platform
+                      starter application to connect IoT devices to the Watson
+                      IoT Platform
+                    </p>
+                    <Button
+                      target="_blank"
+                      href="https://developer.ibm.com/tutorials/how-to-create-an-internet-of-things-platform-starter-application/"
+                      kind="secondary">
+                      {' '}
+                      Learn more{' '}
+                    </Button>
+                  </div>
+
+                  <div className="bx--col-md-4 bx--offset-lg-1 bx--col-lg-8">
+                    <img
+                      className="landing-page__illo"
+                      src={`${process.env.PUBLIC_URL}/tab-illo.png`}
+                      alt="Carbon illustration"
+                    />
                   </div>
                 </div>
               </div>
             </Tab>
-            <Tab {...props.tab} label="Develop">
+            <Tab {...props.tab} label="Lab 2">
+              <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+                <div className="bx--row landing-page__tab-content">
+                  <div className="bx--col-md-4 bx--col-lg-7">
+                    <h2 className="landing-page__subheading">
+                      Lab 2 - Predict equipment failure using IoT sensor data
+                    </h2>
+                    <p className="landing-page__p">
+                      Walk through a prediction methodology that utilizes
+                      multivariate IoT data to collect sensor values and run
+                      algorithms{' '}
+                    </p>
+                    <Button
+                      target="_blank"
+                      href="https://developer.ibm.com/patterns/predict-equipment-failure-using-iot-sensor-data/#instructions"
+                      kind="secondary">
+                      {' '}
+                      Learn more{' '}
+                    </Button>
+                  </div>
+
+                  <div className="bx--col-md-4 bx--offset-lg-1 bx--col-lg-8">
+                    <img
+                      className="landing-page__illo"
+                      src={`${process.env.PUBLIC_URL}/tab-illo.png`}
+                      alt="Carbon illustration"
+                    />
+                  </div>
+                </div>
+              </div>
+            </Tab>
+            <Tab {...props.tab} label="Docs/Misc Labs">
               <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
                 <div className="bx--row landing-page__tab-content">
                   <div className="bx--col-lg-16">
-                    Carbon provides styles and components in Vanilla, React,
-                    Angular, and Vue for anyone building on the web.
+                    <h2 className="landing-page__illo">Labs</h2>
+                    <h2 className="landing-page__p">
+                      {} Various Labs on this Box folder:{' '}
+                      <a
+                        target="_blank"
+                        href="https://ibm.box.com/v/ibmcloud-watson-day-legacy">
+                        ibmcloud-watson-day-legacy
+                      </a>
+                    </h2>
+                    <h2 className="landing-page__illo">
+                      {} Want to know more?
+                    </h2>
+                    <h2 className="landing-page__p">
+                      Please refer to this{' '}
+                      <a
+                        target="_blank"
+                        href="https://www.youtube.com/watch?v=HzugDzl2cfg">
+                        IBM Cloud Introduction
+                      </a>
+                      {} video or this Node-RED introduction on{' '}
+                      <a
+                        target="_blank"
+                        href="https://developer.ibm.com/components/node-red/">
+                        IBM Developer
+                      </a>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </Tab>
+            <Tab {...props.tab} label="Contacts">
+              <div className="bx--grid bx--grid--no-gutter bx--grid--full-width">
+                <div className="bx--row landing-page__tab-content">
+                  <div className="bx--col-lg-16">
+                    <h2 className="landing-page__p">
+                      <p>Please contact Benoit Marolleau </p>
+                      <a
+                        target="_blank"
+                        href="https://developer.ibm.com/profiles/benoit.marolleau/">
+                        benoit.marolleau@fr.ibm.com
+                      </a>
+                    </h2>
+                    <h2 className="landing-page__p">
+                      <p>More content on Benoit's Blog </p>
+                      <a target="_blank" href="https://bmarolleau.github.io/">
+                        bmarolleau.github.io
+                      </a>
+                    </h2>
                   </div>
                 </div>
               </div>
@@ -90,11 +188,13 @@ const LandingPage = () => {
 
       <div className="bx--row landing-page__r3">
         <div className="bx--col-md-4 bx--col-lg-4">
-          <h3 className="landing-page__label">The Principles</h3>
+          <h3 className="landing-page__label">
+            IBM Client Engineering EMEA - IBM Montpellier
+          </h3>
         </div>
-        <div className="bx--col-md-4 bx--col-lg-4">Carbon is Open</div>
-        <div className="bx--col-md-4 bx--col-lg-4">Carbon is Modular</div>
-        <div className="bx--col-md-4 bx--col-lg-4">Carbon is Consistent</div>
+        {/* <div className="bx--col-md-4 bx--col-lg-4">IBM Client Engineering EMEA</div>
+        <div className="bx--col-md-4 bx--col-lg-4"></div>
+        <div className="bx--col-md-4 bx--col-lg-4">Carbon is Consistent</div> */}
       </div>
     </div>
   );

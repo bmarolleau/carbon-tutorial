@@ -1,0 +1,186 @@
+[
+    {
+        "id": "d07524b0.329828",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "3dc1db49.c1a9c4",
+        "type": "function",
+        "z": "d07524b0.329828",
+        "name": "temp",
+        "func": "return{payload:msg.payload.d.temp};",
+        "outputs": 1,
+        "x": 441,
+        "y": 280,
+        "wires": [
+            [
+                "778d966.fd5a2e8"
+            ]
+        ]
+    },
+    {
+        "id": "778d966.fd5a2e8",
+        "type": "switch",
+        "z": "d07524b0.329828",
+        "name": "temp thresh",
+        "property": "payload",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "40"
+            },
+            {
+                "t": "gt",
+                "v": "40"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 590,
+        "y": 281,
+        "wires": [
+            [
+                "5d1fcad6.dcc9ac"
+            ],
+            [
+                "be63e6b7.d6c4c8"
+            ]
+        ]
+    },
+    {
+        "id": "32619377.6dbbac",
+        "type": "debug",
+        "z": "d07524b0.329828",
+        "name": "cpustatus",
+        "active": true,
+        "complete": "false",
+        "x": 1024,
+        "y": 286,
+        "wires": []
+    },
+    {
+        "id": "cda7c81c.ed6008",
+        "type": "debug",
+        "z": "d07524b0.329828",
+        "name": "device data",
+        "active": true,
+        "complete": "false",
+        "x": 441,
+        "y": 191,
+        "wires": []
+    },
+    {
+        "id": "5d1fcad6.dcc9ac",
+        "type": "template",
+        "z": "d07524b0.329828",
+        "name": "safe",
+        "template": "Temperature({{payload}}) within safe limits",
+        "x": 754,
+        "y": 232,
+        "wires": [
+            [
+                "28742fb9.990768",
+                "9a4a31fe.e0ef4"
+            ]
+        ]
+    },
+    {
+        "id": "be63e6b7.d6c4c8",
+        "type": "template",
+        "z": "d07524b0.329828",
+        "name": "danger",
+        "template": "Temperature ({{payload}}) critical",
+        "x": 753,
+        "y": 326,
+        "wires": [
+            [
+                "28742fb9.990768"
+            ]
+        ]
+    },
+    {
+        "id": "f486f95e.edb75",
+        "type": "ibmiot in",
+        "z": "d07524b0.329828",
+        "authentication": "quickstart",
+        "apiKey": "",
+        "inputType": "evt",
+        "deviceId": "d94d5e6f27a2",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT App In",
+        "service": "quickstart",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "x": 227,
+        "y": 285,
+        "wires": [
+            [
+                "cda7c81c.ed6008",
+                "3dc1db49.c1a9c4"
+            ]
+        ]
+    },
+    {
+        "id": "6b18b77e.56fb58",
+        "type": "cloudant out",
+        "z": "d07524b0.329828",
+        "name": "mynode",
+        "cloudant": "",
+        "database": "mydb",
+        "service": "Lab4-IoT-benoit-cloudantNoSQLDB",
+        "payonly": false,
+        "operation": "insert",
+        "x": 602,
+        "y": 387,
+        "wires": []
+    },
+    {
+        "id": "28742fb9.990768",
+        "type": "watson-translator",
+        "z": "d07524b0.329828",
+        "name": "",
+        "action": "translate",
+        "basemodel": "ar-en",
+        "domain": "news",
+        "srclang": "en",
+        "destlang": "fr",
+        "password": "",
+        "custom": "",
+        "domainhidden": "news",
+        "srclanghidden": "en",
+        "destlanghidden": "fr",
+        "basemodelhidden": "ar-en",
+        "customhidden": "",
+        "filetype": "forcedglossary",
+        "trainid": "",
+        "lgparams2": true,
+        "ldparamshidden2": "true",
+        "x": 903,
+        "y": 169,
+        "wires": [
+            [
+                "32619377.6dbbac"
+            ]
+        ]
+    },
+    {
+        "id": "9a4a31fe.e0ef4",
+        "type": "debug",
+        "z": "d07524b0.329828",
+        "name": "cpustatus",
+        "active": true,
+        "complete": "false",
+        "x": 1029,
+        "y": 332,
+        "wires": []
+    }
+]

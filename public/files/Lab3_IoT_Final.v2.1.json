@@ -1,0 +1,467 @@
+[
+    {
+        "id": "2b8f672b.7ea71",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "46d9d1be.7266d",
+        "type": "function",
+        "z": "2b8f672b.7ea71",
+        "name": "temp",
+        "func": "return{payload:msg.payload.d.temp};",
+        "outputs": 1,
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "cae43190.221c2",
+                "fb3f3d52.c6095",
+                "bd799b6d.8c2ca",
+                "880c5064.62ef6"
+            ]
+        ]
+    },
+    {
+        "id": "cae43190.221c2",
+        "type": "switch",
+        "z": "2b8f672b.7ea71",
+        "name": "temp thresh",
+        "property": "payload",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "40"
+            },
+            {
+                "t": "gt",
+                "v": "40"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 499,
+        "y": 201,
+        "wires": [
+            [
+                "18a54213.c7702e"
+            ],
+            [
+                "b94424e3.fbbad8"
+            ]
+        ]
+    },
+    {
+        "id": "218e542a.11c7ec",
+        "type": "debug",
+        "z": "2b8f672b.7ea71",
+        "name": "cpustatus",
+        "active": true,
+        "complete": "false",
+        "x": 1020,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f42975d.691a388",
+        "type": "debug",
+        "z": "2b8f672b.7ea71",
+        "name": "device data",
+        "active": true,
+        "complete": "false",
+        "x": 290,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "18a54213.c7702e",
+        "type": "template",
+        "z": "2b8f672b.7ea71",
+        "name": "safe",
+        "field": "payload",
+        "fieldType": "msg",
+        "syntax": "mustache",
+        "template": "Temperature({{payload}}) within safe limits",
+        "x": 663,
+        "y": 152,
+        "wires": [
+            [
+                "72dde7f2.39bb9"
+            ]
+        ]
+    },
+    {
+        "id": "b94424e3.fbbad8",
+        "type": "template",
+        "z": "2b8f672b.7ea71",
+        "name": "danger",
+        "field": "payload",
+        "fieldType": "msg",
+        "syntax": "mustache",
+        "template": "Temperature ({{payload}}) critical",
+        "x": 662,
+        "y": 246,
+        "wires": [
+            [
+                "72dde7f2.39bb9"
+            ]
+        ]
+    },
+    {
+        "id": "a5d2eb5d.55fff",
+        "type": "ibmiot in",
+        "z": "2b8f672b.7ea71",
+        "authentication": "quickstart",
+        "apiKey": "",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "711a4be8dc44",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT App In",
+        "service": "quickstart",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": false,
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": "0",
+        "x": 136,
+        "y": 205,
+        "wires": [
+            [
+                "f42975d.691a388",
+                "46d9d1be.7266d",
+                "c9c97166.27226",
+                "e78ed783.c20818"
+            ]
+        ]
+    },
+    {
+        "id": "fb3f3d52.c6095",
+        "type": "cloudant out",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "cloudant": "",
+        "database": "iotdata",
+        "service": "xFirstApp-cloudantNoSQLDB",
+        "payonly": false,
+        "operation": "insert",
+        "x": 490,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "72dde7f2.39bb9",
+        "type": "watson-translator",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "action": "translate",
+        "basemodel": "en-nl",
+        "domain": "news",
+        "srclang": "en",
+        "destlang": "fr",
+        "password": "",
+        "custom": "",
+        "domainhidden": "news",
+        "srclanghidden": "en",
+        "destlanghidden": "fr",
+        "basemodelhidden": "",
+        "customhidden": "",
+        "filetype": "forcedglossary",
+        "trainid": "",
+        "lgparams2": true,
+        "neural": true,
+        "default-endpoint": true,
+        "service-endpoint": "https://gateway.watsonplatform.net/language-translator/api",
+        "x": 850,
+        "y": 200,
+        "wires": [
+            [
+                "218e542a.11c7ec",
+                "fec5108f.254c1"
+            ]
+        ]
+    },
+    {
+        "id": "bd799b6d.8c2ca",
+        "type": "ui_gauge",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "group": "672e9d1b.a4a884",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-10",
+        "max": "60",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "40",
+        "x": 390,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c9c97166.27226",
+        "type": "function",
+        "z": "2b8f672b.7ea71",
+        "name": "﻿﻿Humidity",
+        "func": "return{payload:msg.payload.d.humidity,topic:'Humidity'};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 420,
+        "wires": [
+            [
+                "b0451bbc.900cf",
+                "880c5064.62ef6"
+            ]
+        ]
+    },
+    {
+        "id": "e78ed783.c20818",
+        "type": "function",
+        "z": "2b8f672b.7ea71",
+        "name": "Object Temperature",
+        "func": "return{payload:msg.payload.d.objectTemp,topic:'Object temperature'};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 560,
+        "wires": [
+            [
+                "880c5064.62ef6",
+                "b85ca5fd.669738"
+            ]
+        ]
+    },
+    {
+        "id": "b0451bbc.900cf",
+        "type": "ui_gauge",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "group": "26df014a.e3e8de",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 380,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "880c5064.62ef6",
+        "type": "ui_chart",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "group": "68c9a03b.b98528",
+        "order": 2,
+        "width": "30",
+        "height": "5",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "100",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e9",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 690,
+        "y": 420,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b85ca5fd.669738",
+        "type": "ui_gauge",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "group": "ee518203.84f7f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Object Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "80",
+        "seg2": "95",
+        "x": 390,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "fec5108f.254c1",
+        "type": "function",
+        "z": "2b8f672b.7ea71",
+        "name": "Test Text Change",
+        "func": "\nvar PrevMsg = context.get('PrevMsg') || \"\";\n\nif (msg.payload === PrevMsg) {\n     msg.payload = \" \";\n} else {\n    context.set(\"PrevMsg\", msg.payload);  \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 910,
+        "y": 300,
+        "wires": [
+            [
+                "470731a6.8accf",
+                "489a1088.e39918"
+            ]
+        ]
+    },
+    {
+        "id": "470731a6.8accf",
+        "type": "debug",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1090,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "489a1088.e39918",
+        "type": "watson-text-to-speech",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "lang": "fr-FR",
+        "langhidden": "fr-FR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "voice": "fr-FR_ReneeVoice",
+        "voicehidden": "",
+        "format": "audio/wav",
+        "password": "",
+        "payload-response": true,
+        "default-endpoint": true,
+        "service-endpoint": "https://stream.watsonplatform.net/text-to-speech/api",
+        "x": 1120,
+        "y": 340,
+        "wires": [
+            [
+                "656eb2ba.bc7f04"
+            ]
+        ]
+    },
+    {
+        "id": "656eb2ba.bc7f04",
+        "type": "ui_audio",
+        "z": "2b8f672b.7ea71",
+        "name": "",
+        "group": "68c9a03b.b98528",
+        "voice": "",
+        "always": "",
+        "x": 1280,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "672e9d1b.a4a884",
+        "type": "ui_group",
+        "z": "",
+        "name": "Temperature",
+        "tab": "ab7372f6.cd7a88",
+        "order": 1,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "26df014a.e3e8de",
+        "type": "ui_group",
+        "z": "",
+        "name": "Humidity",
+        "tab": "ab7372f6.cd7a88",
+        "order": 2,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "68c9a03b.b98528",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chart",
+        "tab": "ab7372f6.cd7a88",
+        "order": 4,
+        "disp": true,
+        "width": "33",
+        "collapse": false
+    },
+    {
+        "id": "ee518203.84f7f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Object Temperature",
+        "tab": "ab7372f6.cd7a88",
+        "order": 3,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "ab7372f6.cd7a88",
+        "type": "ui_tab",
+        "z": "",
+        "name": "IoT sensor",
+        "icon": "dashboard",
+        "order": 3
+    }
+]

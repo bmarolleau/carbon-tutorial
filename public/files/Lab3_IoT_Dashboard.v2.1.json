@@ -1,0 +1,238 @@
+[
+    {
+        "id": "2d7d439.148363c",
+        "type": "ui_gauge",
+        "z": "8960d90c.4d07d",
+        "name": "",
+        "group": "a54677be.62b79",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "-10",
+        "max": "60",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "40",
+        "x": 430,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ab3c1e92.dc32d",
+        "type": "function",
+        "z": "8960d90c.4d07d",
+        "name": "﻿﻿Humidity",
+        "func": "return{payload:msg.payload.d.humidity,topic:'Humidity'};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "52240a4a.34186c",
+                "b81aae56.3c6c38"
+            ]
+        ]
+    },
+    {
+        "id": "bde7e232.e83fd",
+        "type": "function",
+        "z": "8960d90c.4d07d",
+        "name": "Object Temperature",
+        "func": "return{payload:msg.payload.d.objectTemp,topic:'Object temperature'};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "b81aae56.3c6c38",
+                "c436079a.0a0d18"
+            ]
+        ]
+    },
+    {
+        "id": "52240a4a.34186c",
+        "type": "ui_gauge",
+        "z": "8960d90c.4d07d",
+        "name": "",
+        "group": "4c2982c.15e91fc",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 440,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b81aae56.3c6c38",
+        "type": "ui_chart",
+        "z": "8960d90c.4d07d",
+        "name": "",
+        "group": "80fcf2f5.7dc2c",
+        "order": 2,
+        "width": "30",
+        "height": "5",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "100",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e9",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 730,
+        "y": 440,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c436079a.0a0d18",
+        "type": "ui_gauge",
+        "z": "8960d90c.4d07d",
+        "name": "",
+        "group": "6bc9a9f0.9ccf58",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Object Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "80",
+        "seg2": "95",
+        "x": 470,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "77269d23.9ef5ec",
+        "type": "function",
+        "z": "8960d90c.4d07d",
+        "name": "Test Text Change",
+        "func": "\nvar PrevMsg = context.get('PrevMsg') || \"\";\n\nif (msg.payload === PrevMsg) {\n     msg.payload = \" \";\n} else {\n    context.set(\"PrevMsg\", msg.payload);  \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 930,
+        "y": 320,
+        "wires": [
+            [
+                "7e816089.9b95d8"
+            ]
+        ]
+    },
+    {
+        "id": "7e816089.9b95d8",
+        "type": "debug",
+        "z": "8960d90c.4d07d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1130,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a54677be.62b79",
+        "type": "ui_group",
+        "z": "",
+        "name": "Temperature",
+        "tab": "632f71ef.c9a91",
+        "order": 1,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "4c2982c.15e91fc",
+        "type": "ui_group",
+        "z": "",
+        "name": "Humidity",
+        "tab": "632f71ef.c9a91",
+        "order": 2,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "80fcf2f5.7dc2c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Chart",
+        "tab": "632f71ef.c9a91",
+        "order": 4,
+        "disp": true,
+        "width": "33",
+        "collapse": false
+    },
+    {
+        "id": "6bc9a9f0.9ccf58",
+        "type": "ui_group",
+        "z": "",
+        "name": "Object Temperature",
+        "tab": "632f71ef.c9a91",
+        "order": 3,
+        "disp": true,
+        "width": "11",
+        "collapse": false
+    },
+    {
+        "id": "632f71ef.c9a91",
+        "type": "ui_tab",
+        "z": "",
+        "name": "IoT sensor",
+        "icon": "dashboard",
+        "order": 3
+    }
+]

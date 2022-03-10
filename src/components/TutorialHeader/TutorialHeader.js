@@ -23,21 +23,22 @@ import { Link } from 'react-router-dom';
 const TutorialHeader = () => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-      <Header aria-label="Carbon Tutorial">
+      <Header aria-label="IBM Cloud and Watson Day">
         <SkipToContent />
+
         <HeaderMenuButton
           aria-label="Open menu"
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
         />
         <HeaderName element={Link} to="/" prefix="IBM">
-          Carbon Tutorial
+          Cloud and Watson Day
         </HeaderName>
-        <HeaderNavigation aria-label="Carbon Tutorial">
+        {/* <HeaderNavigation aria-label="Carbon Tutorial">
           <HeaderMenuItem element={Link} to="/repos">
             Repositories
           </HeaderMenuItem>
-        </HeaderNavigation>
+        </HeaderNavigation> */}
         <SideNav
           aria-label="Side navigation"
           expanded={isSideNavExpanded}
@@ -50,17 +51,19 @@ const TutorialHeader = () => (
             </HeaderSideNavItems>
           </SideNavItems>
         </SideNav>
-        <HeaderGlobalBar>
-          <HeaderGlobalAction aria-label="Notifications">
-            <Notification20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="User Avatar">
-            <UserAvatar20 />
-          </HeaderGlobalAction>
-          <HeaderGlobalAction aria-label="App Switcher">
-            <AppSwitcher20 />
-          </HeaderGlobalAction>
-        </HeaderGlobalBar>
+        {
+          <HeaderGlobalBar>
+            <HeaderGlobalAction aria-label="Notifications">
+              <Notification20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction aria-label="User Avatar">
+              <UserAvatar20 />
+            </HeaderGlobalAction>
+            <HeaderGlobalAction aria-label="App Switcher">
+              <AppSwitcher20 />
+            </HeaderGlobalAction>
+          </HeaderGlobalBar>
+        }
       </Header>
     )}
   />

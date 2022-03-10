@@ -1,0 +1,11 @@
+curl -X POST-F "images_file=@fruitbowl.jpg" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=YOUR_API_KEY"
+
+curl -X POST-F "images_file=@fruitbowl2.jpg" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=YOUR_API_KEY"
+ 
+curl -X POST -F "images_file=@prez.jpg" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/detect_faces?api_key=YOUR_API_KEY&version=2016-05-17"
+
+curl -X POST -F "images_file=@sign.jpg" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/recognize_text?api_key=YOUR_API_KEY&version=2016-05-17"
+
+curl -X POST -F "beagle_positive_examples=@Beagle.zip" -F "husky_positive_examples=@Husky.zip" -F "goldenretriever_positive_examples=@GoldenRetriever.zip" -F "negative_examples=@Cats.zip" -F "name=dogs"  "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classifiers?api_key=YOUR_API_KEY&version=2016-05-17"
+
+curl -X POST -F "images_file=@dogs.jpg" -F "parameters=@myparams.json" "https://gateway-a.watsonplatform.net/visual-recognition/api/v3/classify?api_key=YOUR_API_KEY&version=2016-05-20"

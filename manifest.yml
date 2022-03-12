@@ -1,0 +1,6 @@
+---
+applications:
+  - name: ibmcloud-watson-day-carbon
+    memory: 64M
+    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+
